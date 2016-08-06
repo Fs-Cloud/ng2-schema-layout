@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { SchemaLayoutComponent } from '../../../src';
+import { SchemaLayoutDirective } from '../../../src';
 
 @Component({
   selector: 'sb-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  directives: [SchemaLayoutComponent]
+  directives: [SchemaLayoutDirective]
 })
 export class HomeComponent {
 }

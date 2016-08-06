@@ -1,1 +1,1 @@
-export { SchemaLayoutComponent } from './schema-layout.component';
+export * from './schema-layout.directive';
