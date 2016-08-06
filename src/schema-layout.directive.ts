@@ -27,7 +27,7 @@ export class SchemaLayoutDirective {
       return;
     }
     const metadata = new ComponentMetadata(Object.assign({}, this.metadata, {
-      template: this.computeTemplateString(newSchema)
+      template: this.getTemplateFromSchema(newSchema)
     }));
     this.createComponentFactory(this.resolver, metadata)
       .then(factory => {
@@ -43,18 +43,20 @@ export class SchemaLayoutDirective {
     return resolver.resolveComponent(decoratedClass);
   };
 
-  computeTemplateString(schema: any): string {
+  getTemplateFromSchema(schema: any): string {
     let newTemplate = '';
     console.log(schema);
+    if (!schema || !schema.length) {
+      console.error('getTemplateFromSchema expects an array of elements');
+      return '';
+    }
 
     for (let i = 0; i < schema.length; i++) {
       let element = schema[i];
       let attributesKeys = Object.keys(element.attributes);
       let attributes = attributesKeys.map(key => `${key}="${element.attributes[key]}"`).join(' ');
-      let localTemplate = `
-        <${element.tag} ${attributes}>
-        </${element.tag}>
-      `;
+      let children = element.children && element.children.length ? this.getTemplateFromSchema(element.children) : '';
+      let localTemplate = `<${element.tag} ${attributes}>${children}</${element.tag}>`;
       newTemplate += localTemplate;
     }
     return newTemplate;
