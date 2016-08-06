@@ -13,6 +13,7 @@ import {
   selector: '[sbSchemaLayout]',
 })
 export class SchemaLayoutDirective {
+  @Input() directives: any[];
   metadata: any = {
     selector: 'sb-dynamic-grid',
     template: '<div>Loading...</div>'
@@ -27,7 +28,8 @@ export class SchemaLayoutDirective {
       return;
     }
     const metadata = new ComponentMetadata(Object.assign({}, this.metadata, {
-      template: this.getTemplateFromSchema(newSchema)
+      template: this.getTemplateFromSchema(newSchema),
+      directives: this.directives
     }));
     this.createComponentFactory(this.resolver, metadata)
       .then(factory => {
