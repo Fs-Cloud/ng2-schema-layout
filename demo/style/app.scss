@@ -1,0 +1,23 @@
+@import './reset.css';
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #eeeeee;
+    color: #333;
+}
+a {
+    color: #03A9F4;
+}

@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    "protractor",
+    "jasmine"
+  ],
+  "extends": [
+    "plugin:jasmine/recommended",
+    "plugin:protractor/recommended",
+    "airbnb-base/legacy"
+  ],
+  "env": {
+    "jasmine": true
+  },
+  "rules": {
+    "no-console": 1,
+    "no-param-reassign": 0
+  }
+}
