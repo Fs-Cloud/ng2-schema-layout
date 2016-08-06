@@ -5,7 +5,7 @@
       "rows-justify": true,
       "class": "my-class"
     },
-    "child": [
+    "children": [
       {
         "tag": "MyComponent",
         "attributes": {
