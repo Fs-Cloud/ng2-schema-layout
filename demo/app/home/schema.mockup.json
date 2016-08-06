@@ -2,21 +2,22 @@
   {
     "tag": "div",
     "attributes": {
-      "rows-justify": true,
+      "layout": "row center",
       "class": "my-class"
     },
     "children": [
       {
         "tag": "MyComponent",
         "attributes": {
-          "myStuf": "stuff"
+          "myStuf": "stuff",
+          "self": "center"
         }
       },
       {
         "tag": "div",
         "attributes": {
           "layout": "lg-column",
-          "self": "size-x1"
+          "self": "size-x1 center"
         }
       }
     ]
