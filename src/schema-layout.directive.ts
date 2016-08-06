@@ -55,8 +55,17 @@ export class SchemaLayoutDirective {
       let element = schema[i];
       let attributesKeys = Object.keys(element.attributes);
       let attributes = attributesKeys.map(key => `${key}="${element.attributes[key]}"`).join(' ');
-      let children = element.children && element.children.length ? this.getTemplateFromSchema(element.children) : '';
-      let localTemplate = `<${element.tag} ${attributes}>${children}</${element.tag}>`;
+      let content = element.content;
+      let children = element.children;
+      let templateContent = '';
+
+      if (children && children.length) {
+        templateContent = this.getTemplateFromSchema(element.children);
+      } else if (content) {
+        templateContent = content;
+      }
+
+      let localTemplate = `<${element.tag} ${attributes}>${templateContent}</${element.tag}>`;
       newTemplate += localTemplate;
     }
     return newTemplate;

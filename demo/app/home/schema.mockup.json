@@ -8,6 +8,7 @@
     "children": [
       {
         "tag": "MyComponent",
+        "content": "1",
         "attributes": {
           "myStuf": "stuff",
           "self": "center"
@@ -15,6 +16,15 @@
       },
       {
         "tag": "div",
+        "content": "2",
+        "attributes": {
+          "layout": "lg-column",
+          "self": "size-x1 center"
+        }
+      },
+      {
+        "tag": "div",
+        "content": "3",
         "attributes": {
           "layout": "lg-column",
           "self": "size-x1 center"
