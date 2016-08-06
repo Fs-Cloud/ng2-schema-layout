@@ -1,0 +1,25 @@
+[
+  {
+    "tag": "div",
+    "attributes": {
+      "rows-justify": true,
+      "class": "my-class"
+    },
+    "child": [
+      {
+        "tag": "MyComponent",
+        "attributes": {
+          "myStuf": "stuff"
+        }
+      },
+      {
+        "tag": "div",
+        "attributes": {
+          "layout": "lg-column",
+          "self": "size-x1"
+        }
+      }
+    ]
+  }
+]
+
