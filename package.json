@@ -56,6 +56,7 @@
     "eslint-plugin-protractor": "^1.23.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "flex-layout-attribute": "^1.0.3",
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.8.1",
     "istanbul-instrumenter-loader": "^0.2.0",
