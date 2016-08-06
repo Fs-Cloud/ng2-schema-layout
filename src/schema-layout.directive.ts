@@ -27,11 +27,7 @@ export class SchemaLayoutDirective {
       return;
     }
     const metadata = new ComponentMetadata(Object.assign({}, this.metadata, {
-      template: `
-        <div>
-          Hell yeah !
-        </div>
-      `
+      template: this.computeTemplateString(newSchema)
     }));
     this.createComponentFactory(this.resolver, metadata)
       .then(factory => {
@@ -46,5 +42,22 @@ export class SchemaLayoutDirective {
     const decoratedClass = Component(metadata)(componentClass);
     return resolver.resolveComponent(decoratedClass);
   };
+
+  computeTemplateString(schema: any): string {
+    let newTemplate = '';
+    console.log(schema);
+
+    for (let i = 0; i < schema.length; i++) {
+      let element = schema[i];
+      let attributesKeys = Object.keys(element.attributes);
+      let attributes = attributesKeys.map(key => `${key}="${element.attributes[key]}"`).join(' ');
+      let localTemplate = `
+        <${element.tag} ${attributes}>
+        </${element.tag}>
+      `;
+      newTemplate += localTemplate;
+    }
+    return newTemplate;
+  }
 
 };
