@@ -8,4 +8,5 @@ import { SchemaLayoutDirective } from '../../../src';
   directives: [SchemaLayoutDirective]
 })
 export class HomeComponent {
+  schema: any = require('./schema.mockup.json');
 }
