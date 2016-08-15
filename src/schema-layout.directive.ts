@@ -3,10 +3,10 @@ import {
   Component,
   Input,
   ViewContainerRef,
-  ComponentResolver,
   ComponentMetadata,
   ComponentFactory,
-  ReflectiveInjector
+  ReflectiveInjector,
+  Compiler
 } from '@angular/core';
 
 @Directive({
@@ -18,7 +18,7 @@ export class SchemaLayoutDirective {
     template: '<div>Loading...</div>'
   };
 
-  constructor(private viewContainer: ViewContainerRef, private resolver: ComponentResolver) {
+  constructor(private viewContainer: ViewContainerRef, private compiler: Compiler) {
   }
 
   @Input()
@@ -29,19 +29,21 @@ export class SchemaLayoutDirective {
     const metadata = new ComponentMetadata(Object.assign({}, this.metadata, {
       template: this.getTemplateFromSchema(newSchema)
     }));
-    this.createComponentFactory(this.resolver, metadata)
-      .then(factory => {
-        const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.parentInjector);
-        this.viewContainer.createComponent(factory, 0, injector, []);
-      })
+    const decoratedClass = this.createComponentClass(metadata);
+    this.compiler.compileComponentAsync(decoratedClass)
+      .then(factory => this.addComponentToView(factory))
       .catch(err => console.error(err));
   }
 
-  createComponentFactory(resolver: ComponentResolver, metadata: ComponentMetadata): Promise<ComponentFactory<any>> {
+  addComponentToView(factory: ComponentFactory<any>) {
+    const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.parentInjector);
+    this.viewContainer.createComponent(factory, 0, injector, []);
+  }
+
+  createComponentClass(metadata: ComponentMetadata) {
     const componentClass = class DynamicComponent {};
-    const decoratedClass = Component(metadata)(componentClass);
-    return resolver.resolveComponent(decoratedClass);
-  };
+    return Component(metadata)(componentClass);
+  }
 
   getTemplateFromSchema(schema: any): string {
     let newTemplate = '';
