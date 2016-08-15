@@ -7,7 +7,7 @@
     },
     "children": [
       {
-        "tag": "sb-my-component",
+        "tag": "sb-simple-component",
         "content": "1",
         "attributes": {
           "myValue": "It works !",
